@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import ProjectCard from "./ProjectCards";
 import Particle from "../Particle";
+import storysite from "../../Assets/Projects/storysite.png";
 import questapp from "../../Assets/Projects/questapp.png";
 import gymapp from "../../Assets/Projects/gymapp.png";
 import intramuscular from "../../Assets/Projects/intramuscular.png";
@@ -21,17 +22,29 @@ function Projects() {
         </p>
         <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
 
-        <Col md={4} className="project-card">
+          <Col md={4} className="project-card">
+            <ProjectCard
+              imgPath={storysite}
+              isBlog={false}
+              title="StorySite"
+              description="A story website has been developed where stories can be written and shared. The backend of this platform has been integrated with Notion, allowing stories written in Notion to be displayed on the website. Users can easily create and edit their stories through Notion's user-friendly interface. The stories uploaded to the notion become instantly visible and can be read by other users."
+              demoLink="https://storysite.berabyk.com/"
+              ghLink="https://github.com/berabyk/storysite"
+            />
+          </Col>
+
+          <Col md={4} className="project-card">
             <ProjectCard
               imgPath={questapp}
               isBlog={false}
               title="Quest App"
               description="Quest App is a twitter-like site for users can ask questions and answer them. This is my first project with Java Spring Boot. I developed this site for learning backend technologies. Developed with Spring Boot framework for backend, PostgreSQL for database and React for frontend. I also use docker for deploying backend."
               demoLink="https://questapp.berabyk.com/"
-              // details="https://questapp.berabyk.com/"
+              ghLink="https://github.com/berabyk/Spring-Boot-App"
+            // details="https://questapp.berabyk.com/"
             />
           </Col>
-          
+
           <Col md={4} className="project-card">
             <ProjectCard
               imgPath={gymapp}
@@ -55,7 +68,7 @@ function Projects() {
               imgPath={intramuscular}
               isBlog={false}
               title="Intramuscular injection"
-              description="Developed 3D interactive website for nursing students. Used HTML, CSS, JavaScript each of them. Used Javascript libraries Three.js for scene and interactions, GSAP for camera movement and Swiper.js for sliders. Also used Tailwindcss as css framework."  
+              description="Developed 3D interactive website for nursing students. Used HTML, CSS, JavaScript each of them. Used Javascript libraries Three.js for scene and interactions, GSAP for camera movement and Swiper.js for sliders. Also used Tailwindcss as css framework."
             />
           </Col>
 
