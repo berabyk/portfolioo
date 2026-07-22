@@ -1,8 +1,177 @@
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap");
-body {
-  margin: 0;
-  font-family: "Raleway", serif !important;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-image: linear-gradient(to left, rgb(27 20 41), rgb(20 15 35));
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   shadcn theme tokens — "Serious Dark" (dark-only)
+   ============================================================ */
+@layer base {
+  :root {
+    --background: 225 22% 4%;
+    --foreground: 220 16% 92%;
+
+    --panel: 222 20% 8%;
+    --panel-soft: 220 18% 11%;
+
+    --card: 222 20% 7%;
+    --card-foreground: 220 16% 92%;
+
+    --popover: 222 22% 6%;
+    --popover-foreground: 220 16% 92%;
+
+    --primary: 226 56% 65%;
+    --primary-foreground: 226 40% 8%;
+
+    --secondary: 222 16% 13%;
+    --secondary-foreground: 220 15% 90%;
+
+    --muted: 222 16% 13%;
+    --muted-foreground: 220 8% 56%;
+
+    --accent: 222 18% 15%;
+    --accent-foreground: 220 16% 94%;
+
+    --destructive: 0 62% 46%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 220 16% 15%;
+    --input: 220 16% 15%;
+    --ring: 226 56% 65%;
+
+    --radius: 0.85rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight text-white;
+    line-height: 1.1;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.28);
+    color: #fff;
+  }
+
+  /* Decorative background: aura + subtle grid */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(60rem 40rem at 82% -8%, hsl(var(--primary) / 0.12), transparent 60%),
+      radial-gradient(50rem 40rem at -5% 8%, hsl(226 50% 45% / 0.08), transparent 55%),
+      hsl(var(--background));
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-image: linear-gradient(hsl(var(--border) / 0.55) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--border) / 0.55) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 72%);
+    mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 72%);
+    opacity: 0.6;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(220 14% 20%);
+    border-radius: 20px;
+    border: 2px solid hsl(var(--background));
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(220 14% 26%);
+  }
+}
+
+/* ============================================================
+   Custom utilities & effects
+   ============================================================ */
+@layer components {
+  .eyebrow {
+    @apply inline-flex items-center gap-2 font-mono text-sm tracking-wide text-primary/90;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-6 bg-primary;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-[hsl(var(--primary))] to-[hsl(220_40%_80%)] bg-clip-text text-transparent;
+  }
+
+  .panel {
+    background: linear-gradient(180deg, hsl(var(--panel)), hsl(var(--panel-soft)));
+  }
+
+  .type-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.05em;
+    margin-left: 2px;
+    transform: translateY(3px);
+    background: hsl(var(--primary));
+    @apply animate-caret;
+  }
+}
+
+/* Reveal-on-scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* react-github-calendar tweaks */
+.github-cal text {
+  fill: hsl(var(--muted-foreground)) !important;
 }
