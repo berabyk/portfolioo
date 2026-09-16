@@ -12,6 +12,10 @@ export default function Resume() {
 
   useEffect(() => {
     async function fetchPublishedCv() {
+      if (!db) {
+         setLoading(false);
+         return;
+      }
       try {
         const docRef = doc(db, "settings", "publishedResume");
         const docSnap = await getDoc(docRef);
