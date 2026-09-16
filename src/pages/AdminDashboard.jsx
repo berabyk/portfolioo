@@ -37,10 +37,13 @@ export default function AdminDashboard() {
   const { fields: eduFields, append: appendEdu, remove: removeEdu } = useFieldArray({ control, name: "education" });
 
   useEffect(() => {
-    loadCvs();
+    if (db) {
+      loadCvs();
+    }
   }, []);
 
   async function loadCvs() {
+    if (!db) return;
     try {
       const querySnapshot = await getDocs(collection(db, "resumes"));
       const loadedCvs = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
@@ -67,6 +70,10 @@ export default function AdminDashboard() {
   };
 
   const onSave = async (data) => {
+    if (!db) {
+       setMessage("Firebase is not initialized.");
+       return;
+    }
     setLoading(true);
     try {
       if (!data.draftName) data.draftName = `Draft - ${new Date().toLocaleDateString()}`;
@@ -87,6 +94,10 @@ export default function AdminDashboard() {
   };
 
   const onPublish = async (data) => {
+    if (!db || !storage) {
+       setMessage("Firebase is not initialized.");
+       return;
+    }
     setPublishing(true);
     setMessage("");
     try {
