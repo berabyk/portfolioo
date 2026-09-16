@@ -80,9 +80,6 @@ export default function Home() {
                 <span className="font-display font-semibold text-white">{profile.name}</span>
                 <span className="font-mono text-xs text-muted-foreground">Flutter · Web</span>
               </div>
-              <div className="absolute -right-3.5 bottom-5 flex items-center gap-2 rounded-md border border-border bg-panel-soft px-3 py-2 font-mono text-xs text-foreground shadow-[0_20px_40px_-20px_#000]">
-                <Code2 size={15} className="text-primary" /> open to work
-              </div>
             </div>
           </Reveal>
         </div>
